@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>壹墨科技工作室 — EEIMO STUDIO</title>
+<meta name="description" content="壹墨科技工作室。以一滴墨，造万千境。AI 驱动的数字产品工作室，作品包括造境 ZAOJING 等。">
+<link rel="preconnect" href="https://fonts.loli.net">
+<link href="https://fonts.loli.net/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141413;
+  --ink-deep:#0c0c0b;
+  --paper:#faf9f5;
+  --mid:#b0aea5;
+  --pale:#e8e6dc;
+  --orange:#d97757;
+  --blue:#6a9bcc;
+  --green:#788c5d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Lora','Noto Serif SC',Georgia,serif;
+  background:var(--ink);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.sans{font-family:'Poppins','Noto Serif SC',Arial,sans-serif}
+::selection{background:var(--orange);color:var(--ink)}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;
+  padding:26px 40px;
+  mix-blend-mode:difference;
+}
+nav .logo{
+  font-family:'Poppins','Noto Serif SC',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:.4em;
+  color:var(--paper);text-decoration:none;
+}
+nav .links{margin-left:auto;display:flex;gap:36px}
+nav .links a{
+  color:var(--paper);text-decoration:none;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;letter-spacing:.25em;
+  position:relative;padding-bottom:4px;
+  opacity:.7;transition:opacity .25s;
+}
+nav .links a::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:1px;background:var(--paper);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1);
+}
+nav .links a:hover{opacity:1}
+nav .links a:hover::after{transform:scaleX(1)}
+@media(max-width:640px){nav .links{gap:20px}nav{padding:20px 24px}}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  height:100svh;min-height:560px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:var(--ink-deep);
+}
+#inkCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-center{
+  position:relative;text-align:center;z-index:2;
+  padding:0 24px;
+}
+.hero-seal{
+  display:inline-block;
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(96px,18vw,220px);
+  font-weight:900;
+  line-height:1;
+  color:var(--paper);
+  letter-spacing:.04em;
+  opacity:0;
+  animation:inkRise 1.6s cubic-bezier(.16,.8,.24,1) .3s forwards;
+}
+.hero-seal .drop{color:var(--orange)}
+@keyframes inkRise{
+  0%{opacity:0;transform:translateY(40px);filter:blur(14px)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+.hero-sub{
+  margin-top:30px;
+  font-size:clamp(14px,2vw,17px);
+  color:var(--mid);
+  font-style:italic;
+  letter-spacing:.12em;
+  opacity:0;
+  animation:fadeUp 1s cubic-bezier(.2,.7,.2,1) 1.2s forwards;
+}
+.hero-en{
+  margin-top:16px;
+  font-family:'Poppins',sans-serif;
+  font-size:10px;letter-spacing:.5em;
+  color:var(--mid);opacity:0;
+  animation:fadeUp 1s cubic-bezier(.2,.7,.2,1) 1.5s forwards;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:.85;transform:none}}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;animation:fadeUp 1s ease 2.2s forwards;
+}
+.hero-scroll span{
+  font-family:'Poppins',sans-serif;
+  font-size:9px;letter-spacing:.4em;color:var(--mid);
+}
+.hero-scroll .line{
+  width:1px;height:44px;
+  background:linear-gradient(to bottom, var(--mid), transparent);
+  animation:scrollHint 2s ease-in-out infinite;
+}
+@keyframes scrollHint{
+  0%,100%{transform:scaleY(1);opacity:.7}
+  50%{transform:scaleY(.6);opacity:.3}
+}
+
+/* ── SECTION COMMON ── */
+section{position:relative}
+.sec-inner{max-width:1080px;margin:0 auto;padding:130px 40px}
+@media(max-width:640px){.sec-inner{padding:90px 24px}}
+.sec-label{
+  font-family:'Poppins',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:.35em;
+  color:var(--orange);
+  margin-bottom:30px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-label::before{
+  content:'';width:34px;height:1px;background:var(--orange);
+}
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ── ABOUT ── */
+.about{background:var(--ink)}
+.about-grid{
+  display:grid;grid-template-columns:7fr 5fr;gap:70px;align-items:start;
+}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:44px}}
+.about h2{
+  font-size:clamp(30px,4.6vw,48px);
+  font-weight:900;line-height:1.3;letter-spacing:.02em;
+}
+.about h2 em{font-style:normal;color:var(--orange)}
+.about .lead{
+  margin-top:34px;font-size:16px;line-height:2.2;color:var(--mid);
+  max-width:36em;
+}
+.about-side{
+  border-left:1px solid rgba(250,249,245,.14);
+  padding-left:40px;
+  display:flex;flex-direction:column;gap:36px;
+}
+@media(max-width:760px){.about-side{border-left:none;padding-left:0;border-top:1px solid rgba(250,249,245,.14);padding-top:36px}}
+.fact .num{
+  font-family:'Poppins',sans-serif;
+  font-size:38px;font-weight:700;color:var(--paper);
+  line-height:1;
+}
+.fact .num i{font-style:normal;color:var(--orange);font-size:22px}
+.fact .lbl{
+  margin-top:8px;font-size:12.5px;color:var(--mid);
+  font-style:italic;letter-spacing:.06em;
+}
+
+/* ── WORKS ── */
+.works{background:var(--ink-deep)}
+.works-list{border-top:1px solid rgba(250,249,245,.14)}
+.work{
+  display:grid;
+  grid-template-columns:90px 1fr auto;
+  gap:30px;align-items:center;
+  padding:44px 8px;
+  border-bottom:1px solid rgba(250,249,245,.14);
+  text-decoration:none;color:inherit;
+  position:relative;
+  transition:padding-left .4s cubic-bezier(.2,.7,.2,1);
+  cursor:pointer;
+}
+.work::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:0;background:rgba(217,119,87,.06);
+  transition:width .45s cubic-bezier(.2,.7,.2,1);
+  pointer-events:none;
+}
+.work:hover{padding-left:26px}
+.work:hover::before{width:100%}
+.work .idx{
+  font-family:'Poppins',sans-serif;
+  font-size:12px;letter-spacing:.2em;color:var(--mid);
+}
+.work .w-name{
+  font-size:clamp(22px,3.4vw,34px);
+  font-weight:600;letter-spacing:.04em;
+  font-family:'Noto Serif SC',serif;
+}
+.work .w-name small{
+  display:block;
+  font-family:'Poppins',sans-serif;
+  font-size:11px;font-weight:400;letter-spacing:.25em;
+  color:var(--mid);margin-top:8px;
+}
+.work .w-desc{
+  margin-top:12px;font-size:13.5px;color:var(--mid);
+  line-height:1.9;max-width:34em;font-style:italic;
+}
+.work .w-arrow{
+  font-size:22px;color:var(--mid);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),color .25s;
+}
+.work:hover .w-arrow{transform:translateX(10px);color:var(--orange)}
+.work .w-tag{
+  display:inline-block;margin-top:14px;
+  font-family:'Poppins',sans-serif;
+  font-size:9.5px;letter-spacing:.22em;
+  padding:5px 12px;
+  border:1px solid rgba(250,249,245,.25);
+  color:var(--mid);
+}
+.work .w-tag.live{border-color:var(--green);color:var(--green)}
+.work .w-tag.soon{border-color:rgba(250,249,245,.18)}
+@media(max-width:640px){
+  .work{grid-template-columns:1fr auto;gap:16px}
+  .work .idx{display:none}
+}
+
+/* ── CONTACT ── */
+.contact{background:var(--ink)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;
+}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;gap:44px}}
+.contact h2{
+  font-size:clamp(30px,4.6vw,46px);
+  font-weight:900;line-height:1.35;
+}
+.contact h2 em{font-style:normal;color:var(--orange)}
+.contact .c-note{
+  margin-top:26px;font-size:14.5px;line-height:2.1;color:var(--mid);font-style:italic;
+}
+.c-list{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(250,249,245,.14)}
+.c-item{
+  display:flex;align-items:baseline;gap:24px;
+  padding:24px 6px;
+  border-bottom:1px solid rgba(250,249,245,.14);
+  text-decoration:none;color:inherit;
+  transition:padding-left .35s cubic-bezier(.2,.7,.2,1);
+}
+.c-item:hover{padding-left:18px}
+.c-item .c-k{
+  font-family:'Poppins',sans-serif;
+  font-size:10px;letter-spacing:.3em;color:var(--orange);
+  width:84px;flex-shrink:0;
+}
+.c-item .c-v{
+  font-size:16px;letter-spacing:.04em;color:var(--paper);
+  transition:color .25s;
+}
+.c-item:hover .c-v{color:var(--orange)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink-deep);
+  border-top:1px solid rgba(250,249,245,.1);
+  padding:50px 40px 44px;
+  text-align:center;
+}
+footer .f-seal{
+  font-family:'Noto Serif SC',serif;
+  font-size:22px;font-weight:900;letter-spacing:.5em;
+  color:var(--paper);
+  margin-bottom:16px;
+}
+footer .f-seal i{font-style:normal;color:var(--orange)}
+footer p{font-size:11.5px;color:var(--mid);font-style:italic;line-height:2}
+footer .f-en{
+  margin-top:10px;
+  font-family:'Poppins',sans-serif;font-style:normal;
+  font-size:9px;letter-spacing:.4em;color:rgba(176,174,165,.6);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">壹墨<span style="color:var(--orange)">.</span>EEIMO</a>
+  <div class="links">
+    <a href="#about">关于 ABOUT</a>
+    <a href="#works">作品 WORKS</a>
+    <a href="#contact">联络 CONTACT</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="inkCanvas"></canvas>
+  <div class="hero-center">
+    <div class="hero-seal">壹<span class="drop">墨</span></div>
+    <p class="hero-sub">以一滴墨，造万千境。</p>
+    <p class="hero-en">EEIMO STUDIO — ONE INK, INFINITE WORLDS</p>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <div class="line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="sec-inner">
+    <div class="sec-label rv">01 — 关于 ABOUT</div>
+    <div class="about-grid">
+      <div class="rv">
+        <h2>一人，一墨，<br>与算法<em>共笔</em>。</h2>
+        <p class="lead">
+          壹墨科技工作室是一间独立数字产品工作室。我们相信好的工具应当像墨一样——
+          落纸即成形，无需说明书。我们以 AI 为笔、以工程为纸，
+          专注打造小而美的实用产品：让复杂的技术，化作一次点击的从容。
+        </p>
+      </div>
+      <div class="about-side">
+        <div class="fact rv"><div class="num">2026</div><div class="lbl">工作室创立</div></div>
+        <div class="fact rv"><div class="num">1<i>+</i></div><div class="lbl">产品上线运营中</div></div>
+        <div class="fact rv"><div class="num">∞</div><div class="lbl">境，由墨而生</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section class="works" id="works">
+  <div class="sec-inner">
+    <div class="sec-label rv">02 — 作品 WORKS</div>
+    <div class="works-list">
+
+      <a class="work rv" href="https://eeimoo.cn" target="_blank" rel="noopener">
+        <span class="idx">001</span>
+        <div>
+          <div class="w-name">造境<small>ZAOJING — AI 电商产品图工作台</small></div>
+          <p class="w-desc">上传商品图或一句描述，AI 即刻交付可直接上架的专业级产品摄影。实物造境，凭空造物。</p>
+          <span class="w-tag live">LIVE · 运营中</span>
+        </div>
+        <span class="w-arrow">&#8594;</span>
+      </a>
+
+      <div class="work rv" style="cursor:default">
+        <span class="idx">002</span>
+        <div>
+          <div class="w-name">未墨<small>UNTITLED — 下一滴墨，正在研磨</small></div>
+          <p class="w-desc">新的产品正在构思中。一滴墨落下之前，先有长久的静默。</p>
+          <span class="w-tag soon">IN PROGRESS · 研发中</span>
+        </div>
+        <span class="w-arrow" style="opacity:.25">&#8594;</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="sec-inner">
+    <div class="sec-label rv">03 — 联络 CONTACT</div>
+    <div class="contact-grid">
+      <div class="rv">
+        <h2>有想法？<br>来研一方<em>墨</em>。</h2>
+        <p class="c-note">
+          无论是产品合作、定制开发，还是只想聊聊 AI 能为你的生意做什么——
+          欢迎随时来信。
+        </p>
+      </div>
+      <div class="c-list rv">
+        <a class="c-item" href="mailto:hello@eeimoo.cn">
+          <span class="c-k">EMAIL</span>
+          <span class="c-v">hello@eeimoo.cn</span>
+        </a>
+        <a class="c-item" href="https://github.com/EeiMo" target="_blank" rel="noopener">
+          <span class="c-k">GITHUB</span>
+          <span class="c-v">github.com/EeiMo</span>
+        </a>
+        <div class="c-item">
+          <span class="c-k">WECHAT</span>
+          <span class="c-v">eeimo_studio（占位）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-seal">壹<i>墨</i>科技</div>
+  <p>以一滴墨，造万千境。</p>
+  <p class="f-en">EEIMO STUDIO &copy; 2026 — CRAFTED WITH INK &amp; ALGORITHM</p>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   Generative art: "墨晕 Ink Bloom"
+   A drop of ink blooms in darkness — slow fibrous tendrils
+   diffusing outward, seeded per visit. Philosophy: the
+   moment before creation, ink meeting still water.
+═════════════════════════════════════════════════════════ */
+(function(){
+  var cv = document.getElementById('inkCanvas');
+  var ctx = cv.getContext('2d');
+  var W, H, DPR = Math.min(window.devicePixelRatio||1, 2);
+  var seed = (Date.now() % 100000) / 100000;
+  function rnd(){ seed = (seed*9301+49297)%233280; return seed/233280; }
+
+  function resize(){
+    W = cv.width = cv.offsetWidth * DPR;
+    H = cv.height = cv.offsetHeight * DPR;
+    ctx.fillStyle = '#0c0c0b';
+    ctx.fillRect(0,0,W,H);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* ink tendrils: particles spawning from center, drifting
+     outward along curl-ish noise, leaving fading trails */
+  var cx, cy, tendrils = [];
+  function spawnCenter(){
+    cx = W/2 + (rnd()-.5)*W*.08;
+    cy = H/2 + (rnd()-.5)*H*.08;
+  }
+  spawnCenter();
+
+  var PALETTE = [
+    [250,249,245],   // paper white — the ink is INVERTED here: light blooms in dark
+    [217,119,87],    // orange
+    [106,155,204],   // blue
+    [176,174,165]    // mist gray
+  ];
+
+  function newTendril(){
+    var a = rnd()*Math.PI*2;
+    var col = PALETTE[ rnd()<.6 ? 0 : Math.floor(rnd()*PALETTE.length) ];
+    return {
+      x: cx, y: cy,
+      a: a,
+      v: .25 + rnd()*1.1,
+      life: 140 + rnd()*240,
+      maxLife: 380,
+      c: col,
+      w: .5 + rnd()*1.4
+    };
+  }
+  for(var i=0;i<90;i++) tendrils.push(newTendril());
+
+  function field(x,y,t){
+    return Math.sin(x*.0019 + t*.00016)*1.5
+         + Math.cos(y*.0023 - t*.00021)*1.3
+         + Math.sin((x-y)*.0009 + t*.00012)*.9;
+  }
+
+  var t = 0, frame = 0;
+  function tick(){
+    t++; frame++;
+    /* very slow fade — ink lingers */
+    ctx.fillStyle = 'rgba(12,12,11,0.018)';
+    ctx.fillRect(0,0,W,H);
+
+    for(var i=0;i<tendrils.length;i++){
+      var p = tendrils[i];
+      var ang = p.a + field(p.x, p.y, t)*.8;
+      var nx = p.x + Math.cos(ang)*p.v*DPR;
+      var ny = p.y + Math.sin(ang)*p.v*DPR;
+
+      var alpha = Math.min(.34, p.life/p.maxLife*.34);
+      ctx.strokeStyle = 'rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+alpha+')';
+      ctx.lineWidth = p.w*DPR*(p.life/p.maxLife);
+      ctx.beginPath();
+      ctx.moveTo(p.x,p.y);
+      ctx.lineTo(nx,ny);
+      ctx.stroke();
+
+      p.x = nx; p.y = ny; p.life--;
+
+      if(p.life<=0 || p.x<-50 || p.x>W+50 || p.y<-50 || p.y>H+50){
+        tendrils[i] = newTendril();
+      }
+    }
+
+    /* occasionally shift the bloom center — a new drop falls */
+    if(frame % 1100 === 0) spawnCenter();
+
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ── scroll reveal ── */
+(function(){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el, i){
+    el.style.transitionDelay = (i%4)*0.08 + 's';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
