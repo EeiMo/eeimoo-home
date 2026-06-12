@@ -269,6 +269,23 @@ section{position:relative}
   transition:color .25s;
 }
 .c-item:hover .c-v{color:var(--orange)}
+.c-mail{align-items:flex-start}
+.c-mail:hover{padding-left:6px}
+.c-mails{display:flex;flex-direction:column;gap:18px;flex:1}
+.c-mails .c-v{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+  text-decoration:none;color:var(--paper);
+  transition:color .25s,transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.c-mails .c-v:hover{color:var(--orange);transform:translateX(10px)}
+.c-mails .c-v.alt{color:var(--mid);font-size:14.5px}
+.c-mails .c-v.alt:hover{color:var(--orange)}
+.c-pref{
+  font-family:'Poppins',sans-serif;
+  font-size:8.5px;letter-spacing:.3em;
+  color:var(--mid);opacity:.65;
+  flex-shrink:0;
+}
 
 /* ── FOOTER ── */
 footer{
@@ -382,14 +399,13 @@ footer .f-en{
         </p>
       </div>
       <div class="c-list rv">
-        <a class="c-item" href="mailto:EeiMoo@outlook.com">
+        <div class="c-item c-mail">
           <span class="c-k">EMAIL</span>
-          <span class="c-v">EeiMoo@outlook.com</span>
-        </a>
-        <a class="c-item" href="mailto:EeiMoo98@gmail.com">
-          <span class="c-k">EMAIL</span>
-          <span class="c-v">EeiMoo98@gmail.com</span>
-        </a>
+          <div class="c-mails">
+            <a class="c-v" href="mailto:EeiMoo@outlook.com">EeiMoo@outlook.com<span class="c-pref">首选 PRIMARY</span></a>
+            <a class="c-v alt" href="mailto:EeiMoo98@gmail.com">EeiMoo98@gmail.com<span class="c-pref">或 OR</span></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
